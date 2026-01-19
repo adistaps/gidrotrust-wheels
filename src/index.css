@@ -1,0 +1,265 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+@layer base {
+  :root {
+    /* PERBAIKAN: Warna Dominan Hitam Full */
+    --background: 0 0% 7%;
+    /* Charcoal Black #121212 */
+    --foreground: 0 0% 100%;
+
+    --card: 0 0% 4%;
+    /* Hitam sedikit terang untuk dimensi kartu */
+    --card-foreground: 0 0% 100%;
+
+    --popover: 0 0% 3%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 38 92% 50%;
+    --primary-foreground: 0 0% 0%;
+
+    --secondary: 0 0% 8%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 65%;
+
+    --accent: 38 92% 50%;
+    --accent-foreground: 0 0% 0%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 38 92% 50%;
+
+    --radius: 0.5rem;
+
+    --gold: 38 92% 50%;
+    --gold-light: 38 92% 65%;
+
+    --dark: 0 0% 0%;
+    --dark-gray: 0 0% 6%;
+    --light-gray: 0 0% 15%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    /* PERBAIKAN: Memastikan background body selalu hitam */
+    @apply bg-black text-white font-sans antialiased;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Outfit', sans-serif;
+    @apply font-bold uppercase tracking-tight;
+  }
+}
+
+@layer utilities {
+  .hover-scale {
+    @apply transition-transform duration-200 hover:scale-105;
+  }
+
+  .story-link {
+    @apply relative inline-block;
+  }
+
+  .story-link::after {
+    content: '';
+    @apply absolute w-full scale-x-0 h-0.5 bottom-0 left-0 bg-primary origin-bottom-right transition-transform duration-300;
+  }
+
+  .story-link:hover::after {
+    @apply scale-x-100 origin-bottom-left;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent;
+  }
+}
+
+@layer components {
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* PERBAIKAN: Merampingkan spasi yang sebelumnya terlalu besar (Tugas Poin 3) */
+  .section-padding {
+    @apply py-8 md:py-10 lg:py-12;
+  }
+
+  /* Penambahan class khusus untuk Title Page (Halaman Layanan/Harga) agar tidak ada space kosong tak berguna */
+  .title-page-spacing {
+    @apply pt-20 pb-8 md:pt-24 md:pb-10;
+  }
+
+  .btn-primary {
+    @apply relative overflow-hidden bg-primary text-black font-bold px-6 py-3 rounded-xl transition-all duration-300 hover:scale-[1.02] shadow-lg hover:shadow-primary/20 flex items-center justify-center gap-2 uppercase tracking-widest text-sm;
+  }
+
+  .btn-primary::after {
+    content: "";
+    @apply absolute top-0 -left-[100%] w-full h-full bg-gradient-to-r from-transparent via-white/50 to-transparent skew-x-[-25deg];
+    animation: shine 3s infinite;
+  }
+
+  @keyframes shine {
+    0% {
+      left: -100%;
+    }
+
+    20% {
+      left: 100%;
+    }
+
+    100% {
+      left: 100%;
+    }
+  }
+
+  .btn-outline {
+    @apply relative overflow-hidden border-2 border-primary text-primary font-bold px-6 py-3 rounded-xl transition-all duration-300 hover:bg-primary hover:text-black flex items-center justify-center gap-2 uppercase tracking-widest text-sm;
+  }
+
+  .btn-outline::after {
+    content: "";
+    @apply absolute top-0 -left-[100%] w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-[-25deg];
+    animation: shine 3s infinite;
+  }
+
+  .card-hover {
+    transition: all 0.3s ease;
+  }
+
+  .card-hover:hover {
+    box-shadow: 0 0 20px rgba(251, 191, 36, 0.1);
+    transform: translateY(-4px);
+  }
+}
+
+/* Animations (DIPERTAHANKAN PENUH sesuai instruksi) */
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-up {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.6s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: slide-up 0.8s ease-out forwards;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Stagger animation delays (DIPERTAHANKAN PENUH) */
+.stagger-1 {
+  animation-delay: 0.1s;
+}
+
+.stagger-2 {
+  animation-delay: 0.2s;
+}
+
+.stagger-3 {
+  animation-delay: 0.3s;
+}
+
+.stagger-4 {
+  animation-delay: 0.4s;
+}
+
+.stagger-5 {
+  animation-delay: 0.5s;
+}
+
+.stagger-6 {
+  animation-delay: 0.6s;
+}
+
+/* Scroll Animations */
+.reveal {
+  position: relative;
+  opacity: 0;
+  transition: all 0.8s ease-out;
+}
+
+.reveal.active {
+  opacity: 1;
+}
+
+.reveal.bg-to-top {
+  transform: translateY(30px);
+}
+
+.reveal.bg-to-top.active {
+  transform: translateY(0);
+}
+
+.reveal.bg-to-left {
+  transform: translateX(30px);
+}
+
+.reveal.bg-to-left.active {
+  transform: translateX(0);
+}
+
+.reveal.bg-to-right {
+  transform: translateX(-30px);
+}
+
+.reveal.bg-to-right.active {
+  transform: translateX(0);
+}
